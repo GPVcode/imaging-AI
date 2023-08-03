@@ -1,0 +1,237 @@
+html {
+    box-sizing: border-box;
+}
+
+/* slap on this class if content box is needed */
+.legacy {
+    box-sizing: content-box;
+}       
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* remove defaults */
+* {
+    margin: 0;
+    padding: 0;
+    line-height: calc(1em + 0.5rem);
+}
+
+/* improve text rendering */
+body{
+    height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+/* improve media defaults */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Remove built-in form typography styles */
+input, button, textarea, select {
+    font: inherit;
+}
+
+/* avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Create a root stacking context */
+#root, #__next {
+    isolation: isolate;
+    --navbar-bg-color: hsl(0, 0%, 15%);
+    --navbar-text-color: hsl(0, 0%, 85%);
+    --navbar-text-color-focus: white;
+    --navbar-bg-contrast: hsl(0, 0%, 25%);
+  }
+
+/* Center anything horizontally */
+.container{
+    max-width: 1000px;
+    padding: 0 1.4rem;
+    margin: 0 auto;
+}
+
+
+/* parent navbar element */
+#navbar {
+    --navbar-height: 64px;
+    position: fixed;
+    height: var(--navbar-height);
+    background-color: #f4f4f4;
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* nested container element */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+}
+
+/* navbar anchors */
+.navbar-item {
+    margin: 0.4em;
+    width: 100%;
+}
+
+.home-link,
+.navbar-link {
+  color: var(--navbar-text-color);
+  text-decoration: none;
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  
+}
+
+.home-link:is(:focus, :hover) {
+    color: var(--navbar-text-color-focus);
+}
+
+.navbar-link {
+    justify-content: center;
+    width: 100%;
+    padding: 0.4em 0.8em;
+    border-radius: 5px;
+    border-bottom: #F88158 solid;
+}
+  
+.navbar-link:is(:focus, :hover) {
+    color: var(--navbar-text-color-focus);
+    background-color: var(--navbar-bg-contrast);
+}
+
+/* logo filler */
+.logo-filler{
+    background-color: aquamarine;
+    padding: 5px;
+}
+/* logo */
+.navbar-logo {
+    background-color: var(--navbar-text-color-focus);
+    border-radius: 10%;
+    width: 30px;
+    height: 30px;
+    margin-inline-start: 0.5em;
+  }
+
+/* accessible toggle button */
+#navbar-toggle {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* icon bars */
+.icon-bar {
+    display: block;
+    width: 25px;
+    height: 4px;
+    margin: 2px;
+    background-color: #F88158;
+}
+
+/* animate the hamburger icon to become a close icon (X) */
+#navbar-toggle:is(:focus, :hover) .icon-bar {
+    background-color: #F88158;
+}
+
+#navbar-toggle[aria-expanded='true'] .icon-bar:is(:first-child, :last-child) {
+    position: absolute;
+    margin: 0;
+    width: 30px;
+}
+  
+#navbar-toggle[aria-expanded='true'] .icon-bar:first-child {
+    transform: rotate(45deg);
+}
+  
+#navbar-toggle[aria-expanded='true'] .icon-bar:nth-child(2) {
+    opacity: 0;
+}
+  
+#navbar-toggle[aria-expanded='true'] .icon-bar:last-child {
+    transform: rotate(-45deg);
+}
+
+#navbar-menu {
+    position: fixed;
+    top: var(--navbar-height);
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    left: 0;
+    right: 0;
+    
+}
+
+#navbar-toggle[aria-expanded='true'] + #navbar-menu {
+  background-color: #077ea7;
+  opacity: 1;
+  visibility: visible;
+}
+
+.navbar-links {
+  list-style: none;
+  position: absolute;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 0;
+  right: 0;
+  margin: 1.4rem;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  
+}
+
+#navbar-toggle[aria-expanded='true'] + #navbar-menu .navbar-links {
+  padding: 1em;
+}
+
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (min-width: 700px) {
+    #navbar-toggle,
+    #navbar-toggle[aria-expanded='true'] {
+      display: none;
+    }
+  
+    #navbar-menu,
+    #navbar-toggle[aria-expanded='true'] + #navbar-menu {
+      visibility: visible;
+      opacity: 1;
+      position: static;
+      display: block;
+      height: 100%;
+    }
+  
+    .navbar-links,
+    #navbar-toggle[aria-expanded='true'] + #navbar-menu .navbar-links {
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+      position: static;
+      flex-direction: row;
+      width: 100%;
+      height: 100%;
+    }
+  }
