@@ -22,8 +22,9 @@ html {
 body{
     height: 100vh;
     -webkit-font-smoothing: antialiased;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, sans-serif;
     line-height: 1.6;
+    min-width: fit-content;
 }
 
 /* improve media defaults */
@@ -112,11 +113,6 @@ p, h1, h2, h3, h4, h5, h6 {
     background-color: var(--navbar-bg-contrast);
 }
 
-/* logo filler */
-.logo-filler{
-    background-color: aquamarine;
-    padding: 5px;
-}
 /* logo */
 .navbar-logo {
     background-color: var(--navbar-text-color-focus);
@@ -207,6 +203,191 @@ p, h1, h2, h3, h4, h5, h6 {
   padding: 1em;
 }
 
+.container-filler {
+    padding-top: 64px;
+    background-color: aquamarine;
+    /* width: auto; */
+}
+/* filler */
+.filler{
+    background-color: aquamarine;
+    padding: 5px;
+    
+}
+
+/* .input-button {
+    border: none;
+    padding: 8px 18px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    background-color: beige;
+    border-radius: 15px;
+    font-weight: bold;
+
+    color: cadetblue;
+    box-shadow: 0 3px cadetblue;
+}
+.input-button:hover{
+    background-color: blanchedalmond;
+}
+
+.input-button:active {
+    background-color: blanchedalmond;
+    box-shadow: 0 1px #345254;
+    transform: translateY(1px);
+} */
+/* 
+.input-container {
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    column-gap: 25px;
+    display: flex;
+}
+ */
+
+.Card {
+    padding: 1px;
+    border-radius: 10px;
+    background: linear-gradient(-67deg, rgba(#ffffff, .7), blanchedalmond);
+    overflow: hidden;
+    box-shadow: 
+      -2px -2px 6px rgba(#fff, .6),
+      2px 2px 12px #c8d8e7;
+    width: 380px;
+  }
+  
+  .CardInner {
+    padding: 16px 16px;
+    background-color: #0491a3;
+    border-radius: 10px;
+  }
+  
+  .outer-container {
+    display: flex;
+  }
+  
+  .Icon {
+    min-width: 46px;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-right: 12px;
+    box-shadow: -2px -2px 6px #00b4cb, 1px 2px 6px #0491a3;
+      
+    svg {
+      transform: translate(px, -1px);    
+    }
+}
+  
+  label {
+    display: block;
+    color: #ffffff;
+    margin-bottom: 12px;
+    font-weight: 400;
+    background: linear-gradient(45deg,#f3f3f3, #efefef);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .input-container {
+    width: 100%;
+  }
+  
+  input {
+/* 
+    --top-shadow: inset 1px 1px 3px #3b2c2c, inset 2px 2px 6px #171212;
+    --bottom-shadow: inset -2px -2px 4px rgba(212, 45, 45, 0.7);  */
+
+    background-color: #069aad;
+    padding: 16px 32px;
+    border: none;
+    display: block;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #a9b8c9;
+    border-radius: 10px;
+    transition: all 240ms ease-out;
+    width: 100%;
+
+    
+    &::placeholder {
+      color: #f3f3f3;
+      font-size: small;
+    }
+    
+    &:focus {
+      outline: none;
+      color: rgb(223, 223, 223);
+      background-color: lighten(#161d22, 3%);
+    }
+
+    box-shadow: inset 1px 1px 3px #05616d, inset 2px 2px 6px #067b8a;
+    /* 0.3em 0.3em 1em rgba(0, 0, 0, 0.3); */
+
+  };
+    
+  .input-container {
+    border: 1px solid black;
+    /* --top-shadow: inset 1px 1px 3px #000000, inset 2px 2px 6px #1f1f1f;
+    --bottom-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.7); */
+    
+    position: relative;
+    /* border-radius: 10px; */
+    overflow: hidden;
+    
+    &:before,
+    &:after {
+      left: 0;
+      top: 0;
+      display: block;
+      content: "";
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+    
+
+
+    /* &:before {
+      box-shadow: var(--bottom-shadow);
+    }
+    
+    &:after {
+      box-shadow: var(--top-shadow);
+    } */
+  }
+/* End of input */
+
+
+
+.api-container{
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.api-container>*{
+    flex: 1 1 120px;
+    border: #077ea7 solid 1px;
+}
+
+.show-more-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.show-more-btn {
+    background: whitesmoke;
+    border: 1px solid;
+}
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 @media screen and (min-width: 700px) {
@@ -234,4 +415,9 @@ p, h1, h2, h3, h4, h5, h6 {
       width: 100%;
       height: 100%;
     }
+
+    .api-container{
+        flex-direction: column;
+    }
+
   }
