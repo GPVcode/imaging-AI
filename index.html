@@ -11,15 +11,14 @@
     <!-- Navbar -->
     <header id="navbar">
         <nav class="navbar-container container">
-            <div class="filler">They Call Me Logo</div>
-            <!-- <a href="/index.html" class="home-link">
+            <a href="/index.html" class="home-link">
                 AI Image Generator 
                 <img 
                   class="navbar-logo"
                   src="/assets/BlackGPVlogo.svg"
                   alt="logo"
                 >
-            </a> -->
+            </a>
             <button 
                 type="button" 
                 id="navbar-toggle" 
@@ -33,44 +32,46 @@
             </button>
             <div id="navbar-menu" aria-labelledby="navbar-toggle">
                 <ul class="navbar-links">
-                    <!-- <li class="navbar-item"><a class="navbar-link" href="/pages/teams.html">Teams</a></li> -->
-                    <div class="navbar-item filler">GitHub</div>
-                    <div class="navbar-item filler">Logout</div>
-                    <!-- <li class="navbar-item"><a class="navbar-link" href="https://github.com/GPVcode/NBA-API">Github</a></li>
-                    <li class="navbar-item"><a class="navbar-link" href="/teams">Logout</a></li> -->
+                    <li class="navbar-item"><a class="navbar-link" href="/pages/teams.html">Teams</a></li>
+                    <!-- <div class="navbar-item filler">GitHub</div>
+                    <div class="navbar-item filler">Logout</div> -->
+                    <li class="navbar-item"><a class="navbar-link" href="https://github.com/GPVcode/NBA-API">Github</a></li>
+                    <li class="navbar-item"><a class="navbar-link" href="/teams">Logout</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <div class="container-filler">container for input form 
+    <div class="container outer-container">
         <div class="Card">
             <div class="CardInner">
-                <label for="">Describe your image</label>
-                <div class="outer-container">
-                    <div class="Icon">
+                <div class="card-header">
+                    <div class="card-header-left">
+                        <label for="icon-button left">Describe your image</label>
+                    </div>
+                    <div class="card-header-right">
+                        <button class="openai-btn">OpenAI</button>
+                        <button class="unsplash-btn">Unpslash</button>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <div name="icon-button" class="Icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f3f3f3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                     </div>
                     <div class="input-container">
-                        <input placeholder="Dog with a blue ball..." />
+                        <input class="search-input" value="Dog with a blue ball" />
                         <!-- <input type="submit" class="input-button"> -->
                         </div>
                 </div>
             </div>
         </div>
         <div class="api-container">
-            <div class="api-filler">image</div>
-            <div class="api-filler">image</div>
-            <div class="api-filler">image</div>
-            <div class="api-filler">image</div>
-            <div class="api-filler">image</div>
-            <div class="api-filler">image</div>
-            <div class="api-filler">image</div>
-            <div class="api-filler">image</div>
-            <div class="api-filler">image</div>
-            <div class="api-filler">image</div>
-            <div class="api-filler">image</div>
-
+            <div class="api-filler"></div>
+            <div class="api-filler"></div>
+            <div class="api-filler"></div>
+            <div class="api-filler"></div>
+            <div class="api-filler"></div>
+            <div class="api-filler"></div>
         </div>
 
         <div class="show-more-container">
