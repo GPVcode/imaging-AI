@@ -324,11 +324,12 @@ button.openai-btn {
     border: none;
 }
 
-button.openai-btn:active {
+/* button.openai-btn:focus {
     box-shadow: 0 1px #05616d;
     background-color: #0491a3;
     transform: translateY(1px);
-}
+    color: gold;
+} */
 
 button.unsplash-btn {
     background: #0491a3;
@@ -340,11 +341,12 @@ button.unsplash-btn {
     border: none;
 }
 
-button.unsplash-btn:active {
+/* button.unsplash-btn:focus {
     box-shadow: 0 1px #05616d;
     background-color: #0491a3;
     transform: translateY(1px);
-}
+    color: gold;
+} */
 
 .input-container {
     width: 100%;
