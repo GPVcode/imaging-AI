@@ -77,7 +77,7 @@ const OpenaiFetchAPI = async (inputValue) => {
     }
 
     try{
-    const apiKey = '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';
+    // const apiKey = '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';
     const bearer = 'Bearer ' + apiKey;
 
     const response = await fetch(openaiUrl, {
