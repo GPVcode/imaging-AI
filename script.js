@@ -21,55 +21,45 @@ navbarMenu.addEventListener('click', stateToggle);
 // END OF NAVBAR
 
 
-// URL Mothership
-const openaiUrl = "https://api.openai.com/v1/images/generations";
-const unsplashUrl = "UNSPLASH URL GOES HERE"
-
-// Unsplash API call
-    //  access
-    // const accessKey = 'iDW0up-G96bkDL8ycJLkys72YWv5JLImF3DOcL2Nbk8';
-const UnsplashFetchAPI = async (inputValue) => {
-    console.log("Input Value: ", inputValue);
-} 
-// END OF UNSPLASH API
-
-// API Toggle Manger
-let apiChoice = ""
+// Elements
+const imgContainer = document.querySelector(".api-container")
+const imgFiller = document.querySelector(".api-filler");
 const openAiBtn = document.querySelector('.openai-btn');
 const unsplashBtn = document.querySelector('.unsplash-btn');
+const showMoreBtn = document.querySelector(".show-more-btn");
 
-openAiBtn.addEventListener('focus', () => {
-    openAiBtn.style.boxShadow = '0 1px #05616d';
-    openAiBtn.style.backgroundColor = '#0491a3';
-    openAiBtn.style.transform = 'translateY(1px)';
-    openAiBtn.style.color = 'gold';
-})
-openAiBtn.addEventListener('blur', () => {
-    openAiBtn.style.boxShadow = '';
-    openAiBtn.style.backgroundColor = '';
-    openAiBtn.style.transform = '';
-    openAiBtn.style.color = '';
-    apiChoice = 'OPENAIAPI';
-})
-unsplashBtn.addEventListener('focus', () => {
-    unsplashBtn.style.boxShadow = '0 1px #05616d';
-    unsplashBtn.style.backgroundColor = '#0491a3';
-    unsplashBtn.style.transform = 'translateY(1px)';
-    unsplashBtn.style.color = 'gold';
-})
-unsplashBtn.addEventListener('blur', () => {
-    unsplashBtn.style.boxShadow = '';
-    unsplashBtn.style.backgroundColor = '';
-    unsplashBtn.style.transform = '';
-    unsplashBtn.style.color = '';
-    apiChoice = 'UNSPLASHAPI';
-})
-// END OF TOGGLE MANAGER
+// Unsplash API call
 
+let page = 1;
+const UnsplashFetchAPI = async (inputValue) => {
+    const accessKey = 'iDW0up-G96bkDL8ycJLkys72YWv5JLImF3DOcL2Nbk8';
+    try{
+        const url = `https://api.unsplash.com/search/photos?page=${page}&query=${inputValue}&client_id=${accessKey}`
+        const response = await fetch(url)
+        const data = await response.json();
+        const results = data.results
+
+        // if(page === 1) imgContainer.innerHTML = "";
+        // create image element for each loop
+        results.map((result) => {
+            let newImg = document.createElement("img");
+            newImg.setAttribute('src', result.urls.small_s3);
+            newImg.setAttribute('class', "api-img");
+            newImg.setAttribute('alt', result.alt_description)
+
+            imgContainer.appendChild(newImg)
+        })
+    } catch(err){
+        console.log(`Error while fetching from Unsplash: `, err)
+    }
+
+    // page++
+} 
+// END OF UNSPLASH API
 // AI API
 const OpenaiFetchAPI = async (inputValue) => {
-    const imgContainer = document.querySelector(".api-container")
-    const imgFiller = document.querySelector(".api-filler");
+    
+    const openaiUrl = "https://api.openai.com/v1/images/generations";
 
     // while children, remove each child
     while(imgFiller[0]){
@@ -77,7 +67,7 @@ const OpenaiFetchAPI = async (inputValue) => {
     }
 
     try{
-    // const apiKey = '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';
+    const apiKey = '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';
     const bearer = 'Bearer ' + apiKey;
 
     const response = await fetch(openaiUrl, {
@@ -107,15 +97,44 @@ const OpenaiFetchAPI = async (inputValue) => {
 
         imgContainer.appendChild(newImg)
     }
-
-    console.log("type of data:", typeof data);
-    console.log("Objec keys of data", Object.keys(data));
-
     } catch(error){
         console.error('Something bad happened:', error)
     }
 }
 // END OF AI API
+
+// API Toggle Manger
+let apiChoice = ""
+
+openAiBtn.addEventListener('focus', () => {
+    openAiBtn.style.boxShadow = '0 1px #05616d';
+    openAiBtn.style.backgroundColor = '#0491a3';
+    openAiBtn.style.transform = 'translateY(1px)';
+    openAiBtn.style.color = 'gold';
+})
+openAiBtn.addEventListener('blur', () => {
+    openAiBtn.style.boxShadow = '';
+    openAiBtn.style.backgroundColor = '';
+    openAiBtn.style.transform = '';
+    openAiBtn.style.color = '';
+    apiChoice = 'OPENAIAPI';
+    showMoreBtn.hidden = true;
+})
+unsplashBtn.addEventListener('focus', () => {
+    unsplashBtn.style.boxShadow = '0 1px #05616d';
+    unsplashBtn.style.backgroundColor = '#0491a3';
+    unsplashBtn.style.transform = 'translateY(1px)';
+    unsplashBtn.style.color = 'gold';
+})
+unsplashBtn.addEventListener('blur', () => {
+    unsplashBtn.style.boxShadow = '';
+    unsplashBtn.style.backgroundColor = '';
+    unsplashBtn.style.transform = '';
+    unsplashBtn.style.color = '';
+    apiChoice = 'UNSPLASHAPI';
+    showMoreBtn.hidden = false;
+})
+// END OF TOGGLE MANAGER
 
 // FORM MIDDLEWARE
 // button triggers api call
@@ -123,9 +142,7 @@ const searchBtn = document.querySelector('.Icon');
 // manage input contents
 const searchInput = document.querySelector('.search-input');
 
-
 searchBtn.addEventListener('click', () => {
-
     searchInput.setAttribute('value', searchInput.value)
     const inputValue = searchInput.value;
 
@@ -138,4 +155,9 @@ searchBtn.addEventListener('click', () => {
     }
 })
 // END OF FORM MIDDLWARE
-// Show more button API
+
+
+showMoreBtn.addEventListener('click', () => {
+    UnsplashFetchAPI();
+})
+
