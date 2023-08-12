@@ -64,7 +64,7 @@ const UnsplashFetchAPI = async (inputValue, currentPage) => {
     }
 
     try{
-        const response = await fetch(`https://imaging-ai.vercel.app/get-photos?query=${inputValue}&page=${currentPage}`);
+        const response = await fetch(`/get-photos?query=${inputValue}&page=${currentPage}`);
         if (!response.ok) {
             throw new Error(`Network response was not ok: ${response.status}`);
         };
@@ -88,7 +88,7 @@ const OpenaiFetchAPI = async (inputValue) => {
     }
 
     try{
-        const response = await fetch('https://imaging-ai.vercel.app/generate-photos', {
+        const response = await fetch('/generate-photos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
