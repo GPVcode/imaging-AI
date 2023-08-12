@@ -64,9 +64,10 @@ const UnsplashFetchAPI = async (inputValue, currentPage) => {
     }
 
     try{
+        console.log("right before unsplash fetch")
         const response = await fetch(`/get-photos?query=${inputValue}&page=${currentPage}`);
         if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.status}`);
+            throw new Error(`Network response was not ok for unsplash: ${response.status}`);
         };
         const results = await response.json();
 
@@ -88,6 +89,8 @@ const OpenaiFetchAPI = async (inputValue) => {
     }
 
     try{
+        console.log("right before openAI fetch")
+
         const response = await fetch('/generate-photos', {
             method: 'POST',
             headers: {
@@ -98,7 +101,7 @@ const OpenaiFetchAPI = async (inputValue) => {
             })
         });
         if(!response.ok){
-            throw new Error(`Network response was not ok from client: ${response.status}`)
+            throw new Error(`Network response was not ok for open ai: ${response.status}`)
         }
         const myImages = await response.json()
         imgContainer.innerHTML = ''; // Clear previous Images
