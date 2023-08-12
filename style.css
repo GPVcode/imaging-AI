@@ -121,7 +121,7 @@ p, h1, h2, h3, h4, h5, h6 {
     width: 30px;
     height: 30px;
     margin-inline-start: 0.5em;
-  }
+}
 
 /* accessible toggle button */
 #navbar-toggle {
@@ -176,7 +176,6 @@ p, h1, h2, h3, h4, h5, h6 {
     visibility: hidden;
     left: 0;
     right: 0;
-    
 }
 
 #navbar-toggle[aria-expanded='true'] + #navbar-menu {
@@ -197,7 +196,6 @@ p, h1, h2, h3, h4, h5, h6 {
   margin: 1.4rem;
   border-radius: 5px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  
 }
 
 #navbar-toggle[aria-expanded='true'] + #navbar-menu .navbar-links {
@@ -207,14 +205,10 @@ p, h1, h2, h3, h4, h5, h6 {
 .container-filler {
     padding-top: 64px;
     background-color: aquamarine;
-    /* width: auto; */
 }
 
 .outer-container {
     padding-top: 64px;
-    padding-bottom: 10px;
-    height: 100%;
-
 }
 /* filler */
 .filler{
@@ -223,40 +217,8 @@ p, h1, h2, h3, h4, h5, h6 {
     
 }
 
-/* .input-button {
-    border: none;
-    padding: 8px 18px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    background-color: beige;
-    border-radius: 15px;
-    font-weight: bold;
-
-    color: cadetblue;
-    box-shadow: 0 3px cadetblue;
-}
-.input-button:hover{
-    background-color: blanchedalmond;
-}
-
-.input-button:active {
-    background-color: blanchedalmond;
-    box-shadow: 0 1px #345254;
-    transform: translateY(1px);
-} */
-/* 
-.input-container {
-    background-color: #ffffff;
-    align-items: center;
-    justify-content: center;
-    column-gap: 25px;
-    display: flex;
-}
- */
-
 .Card {
-    padding: 15px;
+    padding: 40px;
     border-radius: 10px;
     overflow: hidden;
     display: flex;
@@ -294,8 +256,6 @@ p, h1, h2, h3, h4, h5, h6 {
     margin-right: 12px;
     box-shadow: 0px -1px 3px #05616d, 1px 2px 6px #0491a3;
     cursor: pointer;
-      
-
 }
   
 .Icon:active {
@@ -326,13 +286,6 @@ button.openai-btn {
     border: none;
 }
 
-/* button.openai-btn:focus {
-    box-shadow: 0 1px #05616d;
-    background-color: #0491a3;
-    transform: translateY(1px);
-    color: gold;
-} */
-
 button.unsplash-btn {
     background: #0491a3;
     min-width: 80px;
@@ -342,13 +295,6 @@ button.unsplash-btn {
     cursor: pointer;
     border: none;
 }
-
-/* button.unsplash-btn:focus {
-    box-shadow: 0 1px #05616d;
-    background-color: #0491a3;
-    transform: translateY(1px);
-    color: gold;
-} */
 
 .input-container {
     width: 100%;
@@ -443,8 +389,22 @@ input {
     display:none;
 }
 
+.alert-container {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    margin: 0;
+}
 
-
+.alert-message {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 @media screen and (min-width: 700px) {
     #navbar-toggle,

@@ -20,88 +20,152 @@ navbarLinksContainer.addEventListener('click', (e) => e.stopPropagation());
 navbarMenu.addEventListener('click', stateToggle);
 // END OF NAVBAR
 
-
 // Elements
 const imgContainer = document.querySelector(".api-container")
 const imgFiller = document.querySelector(".api-filler");
 const openAiBtn = document.querySelector('.openai-btn');
 const unsplashBtn = document.querySelector('.unsplash-btn');
 const showMoreBtn = document.querySelector(".show-more-btn");
+const outerContainer = document.querySelector('.outer-container');
+const alertContainer = document.querySelector('.alert-container')
+const alertMessage = document.querySelector('.alert-message')
+
 
 // Unsplash API call
+let currentPage = 1;
+const displayPhotos = async (inputValue, currentPage) => {
 
-let page = 1;
-const UnsplashFetchAPI = async (inputValue) => {
-    const accessKey = 'iDW0up-G96bkDL8ycJLkys72YWv5JLImF3DOcL2Nbk8';
     try{
-        const url = `https://api.unsplash.com/search/photos?page=${page}&query=${inputValue}&client_id=${accessKey}`
-        const response = await fetch(url)
-        const data = await response.json();
-        const results = data.results
+        const results = await UnsplashFetchAPI(inputValue, currentPage);
 
-        // if(page === 1) imgContainer.innerHTML = "";
-        // create image element for each loop
-        results.map((result) => {
-            let newImg = document.createElement("img");
-            newImg.setAttribute('src', result.urls.small_s3);
-            newImg.setAttribute('class', "api-img");
-            newImg.setAttribute('alt', result.alt_description)
+        if(currentPage === 1) imgContainer.innerHTML = '';
 
-            imgContainer.appendChild(newImg)
-        })
-    } catch(err){
-        console.log(`Error while fetching from Unsplash: `, err)
+        results.forEach((result) => {
+            const newImg = document.createElement('img');
+            newImg.src = result.urls.small_s3;
+            newImg.classList.add('api-img');
+            newImg.alt = result.alt_description;
+
+            imgContainer.appendChild(newImg);
+        });        
+
+    } catch (error){
+        console.error('Fetch error:', error);
+    }
+}
+const UnsplashFetchAPI = async (inputValue, currentPage) => {
+
+    const currentCont = document.querySelector('.alert-container');
+    if(currentCont){
+        if(alertMessage){
+            alertMessage.remove()
+        }
+        currentCont.remove();
     }
 
-    // page++
-} 
+    try{
+        const response = await fetch(`http://localhost:5000/get-photos?query=${inputValue}&page=${currentPage}`);
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.status}`);
+        };
+        const results = await response.json();
+
+        return results;
+    } catch(err){
+        console.log(`Fetch error: `, err)
+        throw err;
+    }
+}
 // END OF UNSPLASH API
 // AI API
 const OpenaiFetchAPI = async (inputValue) => {
-    
-    const openaiUrl = "https://api.openai.com/v1/images/generations";
-
-    // while children, remove each child
-    while(imgFiller[0]){
-        imgFiller[0].parentNode.removeChild(imgFiller[0]);
+    const currentCont = document.querySelector('.alert-container');
+    if(currentCont){
+        if(alertMessage){
+            alertMessage.remove()
+        }
+        currentCont.remove();
     }
 
     try{
-    const apiKey = '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';
-    const bearer = 'Bearer ' + apiKey;
+        const response = await fetch('http://localhost:5000/generate-photos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                inputValue: inputValue
+            })
+        });
+        if(!response.ok){
+            throw new Error(`Network response was not ok from client: ${response.status}`)
+        }
+        const myImages = await response.json()
+        imgContainer.innerHTML = ''; // Clear previous Images
 
-    const response = await fetch(openaiUrl, {
-        method: 'POST',
-        headers: {
-            'Authorization': bearer,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "prompt": `${inputValue}`,
-            "n": 6,
-            "size": "256x256",
-        })
-    });
+        for(const image of myImages){
+            const newImg = document.createElement('img');
+            newImg.src = image.url;
+            newImg.classList.add('api-img');
 
-    const data = await response.json();
-    const myImages = data.data;
+            imgContainer.appendChild(newImg);
+        }
 
-    // after API is successful
-    // loop through myImages array, and for each loop
-    // create new img element, set src attribute to url
-    // and append this newImg element to imgContainer
-    for(let i = 0; i < myImages.length; i++){
-        let newImg = document.createElement("img");
-        newImg.setAttribute('src', myImages[i].url);
-        newImg.setAttribute('class', "api-img");
-
-        imgContainer.appendChild(newImg)
-    }
     } catch(error){
-        console.error('Something bad happened:', error)
+        console.error('Fetch error:', error);
     }
 }
+
+const checkForElement = async () => {
+    const currentCont = document.querySelector('.alert-container');
+    if(!currentCont){
+        await createAlert();
+    } else {
+        () => {}
+    }
+}
+
+const createAlert = async () => {
+        // create div element
+        const alertCont = document.createElement('div');
+        const alertMsg = document.createElement('p');
+        alertCont.setAttribute('class', 'alert-container');
+        alertMsg.setAttribute('class', 'alert-message');
+        alertMsg.textContent = `Please select an image source.`
+
+        alertCont.appendChild(alertMsg);
+        outerContainer.appendChild(alertCont);
+}
 // END OF AI API
+
+// FORM MIDDLEWARE
+// button triggers api call
+const searchBtn = document.querySelector('.Icon');
+// manage input contents
+const searchInput = document.querySelector('.search-input');
+
+searchBtn.addEventListener('click', async () => {
+    searchInput.setAttribute('value', searchInput.value)
+    const inputValue = searchInput.value;
+
+    if(apiChoice === "OPENAIAPI"){
+        await OpenaiFetchAPI(inputValue);
+    } 
+    else if(apiChoice === "UNSPLASHAPI"){
+        currentPage = 1;
+        await displayPhotos(inputValue, currentPage);
+    }
+    else {
+       await checkForElement();
+    }
+})
+// END OF FORM MIDDLWARE
+
+showMoreBtn.addEventListener('click', async () => {
+    const inputValue = searchInput.value;
+    currentPage += 1;
+    await displayPhotos(inputValue, currentPage);
+})
 
 // API Toggle Manger
 let apiChoice = ""
@@ -135,29 +199,3 @@ unsplashBtn.addEventListener('blur', () => {
     showMoreBtn.hidden = false;
 })
 // END OF TOGGLE MANAGER
-
-// FORM MIDDLEWARE
-// button triggers api call
-const searchBtn = document.querySelector('.Icon');
-// manage input contents
-const searchInput = document.querySelector('.search-input');
-
-searchBtn.addEventListener('click', () => {
-    searchInput.setAttribute('value', searchInput.value)
-    const inputValue = searchInput.value;
-
-    if(apiChoice === "OPENAIAPI"){
-        OpenaiFetchAPI(inputValue);
-    } else if(apiChoice === "UNSPLASHAPI"){
-        UnsplashFetchAPI(inputValue)
-    } else {
-        console.log("Please select API source")
-    }
-})
-// END OF FORM MIDDLWARE
-
-
-showMoreBtn.addEventListener('click', () => {
-    UnsplashFetchAPI();
-})
-
