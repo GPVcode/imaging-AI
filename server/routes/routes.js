@@ -21,6 +21,7 @@ router.get("/get-photos", async (req, res) => {
 
     try{
         const inputValue = req.query.query;
+        console.log("input value: ", inputValue)
         const page = req.query.page || 1;
         const results = await controller.getPhotos(inputValue, page);
         res.json(results);

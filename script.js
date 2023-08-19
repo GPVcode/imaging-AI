@@ -55,19 +55,13 @@ const displayPhotos = async (inputValue, currentPage) => {
 }
 const UnsplashFetchAPI = async (inputValue, currentPage) => {
 
-    const currentCont = document.querySelector('.alert-container');
-    if(currentCont){
-        if(alertMessage){
-            alertMessage.remove()
-        }
-        currentCont.remove();
-    }
-
     try{
-        console.log("right before unsplash fetch")
-        const response = await fetch(`http://imaging-ai.vercel.app/get-photos?query=${inputValue}&page=${currentPage}`);
+        const response = await fetch(`http://localhost:5000/get-photos?query=${inputValue}&page=${currentPage}`);
+        console.log("test", response)
+
         if (!response.ok) {
-            throw new Error(`Network response was not ok for unsplash: ${response.status}`);
+            
+            throw new Error(`Network response was not ok: ${response.status}`);
         };
         const results = await response.json();
 
@@ -87,11 +81,8 @@ const OpenaiFetchAPI = async (inputValue) => {
         }
         currentCont.remove();
     }
-
     try{
-        console.log("right before openAI fetch")
-
-        const response = await fetch('http://imaging-ai.vercel.app/generate-photos', {
+        const response = await fetch('http://localhost:5000/generate-photos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -101,7 +92,7 @@ const OpenaiFetchAPI = async (inputValue) => {
             })
         });
         if(!response.ok){
-            throw new Error(`Network response was not ok for open ai: ${response.status}`)
+            throw new Error(`Network response was not ok from client: ${response.status}`)
         }
         const myImages = await response.json()
         imgContainer.innerHTML = ''; // Clear previous Images
@@ -138,37 +129,15 @@ const createAlert = async () => {
 
         alertCont.appendChild(alertMsg);
         outerContainer.appendChild(alertCont);
+
+
+    // alertMsg.textContent = 'Please select an image source.';
+    // alertCont.appendChild(alertMsg)
+    // head to css to design image source alert;
+    
 }
+
 // END OF AI API
-
-// FORM MIDDLEWARE
-// button triggers api call
-const searchBtn = document.querySelector('.Icon');
-// manage input contents
-const searchInput = document.querySelector('.search-input');
-
-searchBtn.addEventListener('click', async () => {
-    searchInput.setAttribute('value', searchInput.value)
-    const inputValue = searchInput.value;
-
-    if(apiChoice === "OPENAIAPI"){
-        await OpenaiFetchAPI(inputValue);
-    } 
-    else if(apiChoice === "UNSPLASHAPI"){
-        currentPage = 1;
-        await displayPhotos(inputValue, currentPage);
-    }
-    else {
-       await checkForElement();
-    }
-})
-// END OF FORM MIDDLWARE
-
-showMoreBtn.addEventListener('click', async () => {
-    const inputValue = searchInput.value;
-    currentPage += 1;
-    await displayPhotos(inputValue, currentPage);
-})
 
 // API Toggle Manger
 let apiChoice = ""
@@ -202,3 +171,34 @@ unsplashBtn.addEventListener('blur', () => {
     showMoreBtn.hidden = false;
 })
 // END OF TOGGLE MANAGER
+
+
+// FORM MIDDLEWARE
+// button triggers api call
+const searchBtn = document.querySelector('.Icon');
+// manage input contents
+const searchInput = document.querySelector('.search-input');
+
+searchBtn.addEventListener('click', async () => {
+    searchInput.setAttribute('value', searchInput.value)
+    const inputValue = searchInput.value;
+
+    if(apiChoice === "OPENAIAPI"){
+        await OpenaiFetchAPI(inputValue);
+    } 
+    else if(apiChoice === "UNSPLASHAPI"){
+        currentPage = 1;
+        await displayPhotos(inputValue, currentPage);
+    }
+    else {
+       await checkForElement();
+    }
+})
+// END OF FORM MIDDLWARE
+
+showMoreBtn.addEventListener('click', async () => {
+    const inputValue = searchInput.value;
+    currentPage += 1;
+    await displayPhotos(inputValue, currentPage);
+})
+
