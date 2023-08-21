@@ -218,7 +218,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .Card {
-    padding: 40px;
+    padding: 70px 0px 40px;
     border-radius: 10px;
     overflow: hidden;
     display: flex;
@@ -353,7 +353,7 @@ input {
 .api-container{
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 15px;
+    padding-bottom: 50px;
 }
 
 .api-container>*{
@@ -407,6 +407,20 @@ input {
     border-radius: 5px;
     font-weight: bold;
 }
+
+/* loading Icon */
+#loading-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0491a3;
+    padding-bottom: 40px;
+}
+.hidden{
+    display: none;
+}
+
+
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 @media screen and (min-width: 700px) {
     #navbar-toggle,

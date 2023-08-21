@@ -3,11 +3,9 @@ const router = express.Router();
 import controller from '../controllers/controller.js'
 
 router.post("/generate-photos", async (req, res) => {
-    console.log("generate AI route")
     try{
         const inputValue = req.body.inputValue;
         const myImages = await controller.generatePhotos(inputValue);
-
         // handle myImages array as needed and send response
         res.json(myImages);
     } catch(error){
@@ -17,11 +15,8 @@ router.post("/generate-photos", async (req, res) => {
 });
 
 router.get("/get-photos", async (req, res) => {
-    console.log("unsplash route")
-
     try{
         const inputValue = req.query.query;
-        console.log("input value: ", inputValue)
         const page = req.query.page || 1;
         const results = await controller.getPhotos(inputValue, page);
         res.json(results);

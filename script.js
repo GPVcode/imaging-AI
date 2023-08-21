@@ -21,15 +21,15 @@ navbarMenu.addEventListener('click', stateToggle);
 // END OF NAVBAR
 
 // Elements
-const imgContainer = document.querySelector(".api-container")
+const imgContainer = document.querySelector(".api-container");
 const imgFiller = document.querySelector(".api-filler");
 const openAiBtn = document.querySelector('.openai-btn');
 const unsplashBtn = document.querySelector('.unsplash-btn');
 const showMoreBtn = document.querySelector(".show-more-btn");
 const outerContainer = document.querySelector('.outer-container');
-const alertContainer = document.querySelector('.alert-container')
-const alertMessage = document.querySelector('.alert-message')
-
+const alertContainer = document.querySelector('.alert-container');
+const alertMessage = document.querySelector('.alert-message');
+const loadingImg = document.getElementById('loading-img');
 
 // Unsplash API call
 let currentPage = 1;
@@ -56,8 +56,7 @@ const displayPhotos = async (inputValue, currentPage) => {
 const UnsplashFetchAPI = async (inputValue, currentPage) => {
 
     try{
-        const response = await fetch(`http://localhost:5000/get-photos?query=${inputValue}&page=${currentPage}`);
-        console.log("test", response)
+        const response = await fetch(`https://imaging-ai.vercel.app/get-photos?query=${inputValue}&page=${currentPage}`);
 
         if (!response.ok) {
             
@@ -72,6 +71,16 @@ const UnsplashFetchAPI = async (inputValue, currentPage) => {
     }
 }
 // END OF UNSPLASH API
+
+// create functions to show and hide loading icon
+// place show loading icon right after try and hide loading after catch using finally
+const showLoadingIcon = () => {
+    loadingImg.classList.remove('hidden');
+}
+const hideLoadingIcon = () => {
+    loadingImg.classList.add('hidden')
+}
+
 // AI API
 const OpenaiFetchAPI = async (inputValue) => {
     const currentCont = document.querySelector('.alert-container');
@@ -82,7 +91,8 @@ const OpenaiFetchAPI = async (inputValue) => {
         currentCont.remove();
     }
     try{
-        const response = await fetch('http://localhost:5000/generate-photos', {
+        showLoadingIcon();
+        const response = await fetch('https://imaging-ai.vercel.app/generate-photos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -107,6 +117,8 @@ const OpenaiFetchAPI = async (inputValue) => {
 
     } catch(error){
         console.error('Fetch error:', error);
+    } finally {
+        hideLoadingIcon();
     }
 }
 
@@ -120,6 +132,7 @@ const checkForElement = async () => {
 }
 
 const createAlert = async () => {
+
         // create div element
         const alertCont = document.createElement('div');
         const alertMsg = document.createElement('p');
@@ -130,13 +143,7 @@ const createAlert = async () => {
         alertCont.appendChild(alertMsg);
         outerContainer.appendChild(alertCont);
 
-
-    // alertMsg.textContent = 'Please select an image source.';
-    // alertCont.appendChild(alertMsg)
-    // head to css to design image source alert;
-    
 }
-
 // END OF AI API
 
 // API Toggle Manger
