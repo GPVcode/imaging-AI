@@ -8,7 +8,11 @@ import routes from './routes/routes.js'
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors()); // Use cors middleware to enable CORS
+app.use(cors({
+    origin: 'https://imaging-ai.vercel.app/',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+})); // Use cors middleware to enable CORS
 // console.log(process.env.PORT)
 
 app.use('/', routes)
