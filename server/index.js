@@ -9,7 +9,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://imaging-ai.vercel.app/',
+    origin: 'https://imaging-1suadwfil-gpvdev.vercel.app/',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 })); // Use cors middleware to enable CORS
