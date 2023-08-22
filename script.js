@@ -59,7 +59,7 @@ const UnsplashFetchAPI = async (inputValue, currentPage) => {
 
     try{
         console.log("right after try Unsplash")
-        const response = await fetch(`/get-photos?query=${inputValue}&page=${currentPage}`);
+        const response = await fetch(`https://imagingai.onrender.com/get-photos?query=${inputValue}&page=${currentPage}`);
 
         if (!response.ok) {
             
@@ -97,7 +97,7 @@ const OpenaiFetchAPI = async (inputValue) => {
         console.log("right after try OpenAI")
 
         showLoadingIcon();
-        const response = await fetch('/generate-photos', {
+        const response = await fetch('https://imagingai.onrender.com/generate-photos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
