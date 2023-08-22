@@ -56,7 +56,7 @@ const displayPhotos = async (inputValue, currentPage) => {
 const UnsplashFetchAPI = async (inputValue, currentPage) => {
 
     try{
-        const response = await fetch(`https://imaging-ai.vercel.app/get-photos?query=${inputValue}&page=${currentPage}`);
+        const response = await fetch(`http://imaging-ai.vercel.app/get-photos?query=${inputValue}&page=${currentPage}`);
 
         if (!response.ok) {
             
@@ -92,7 +92,7 @@ const OpenaiFetchAPI = async (inputValue) => {
     }
     try{
         showLoadingIcon();
-        const response = await fetch('https://imaging-ai.vercel.app/generate-photos', {
+        const response = await fetch('http://imaging-ai.vercel.app/generate-photos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
