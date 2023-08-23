@@ -61,7 +61,7 @@ const UnsplashFetchAPI = async (inputValue, currentPage) => {
     try{
         console.log("right after try Unsplash")
         const response = await fetch(`https://imagingai.onrender.com/get-photos?query=${inputValue}&page=${currentPage}`);
-
+        console.log("here is the response: ", response)
         if (!response.ok) {
             console.error(`Network response was not ok: ${response.status}`);
             throw new Error(`Network response was not ok: ${response.status}`);
