@@ -7,14 +7,14 @@ import routes from './routes/routes.js'
 
 const app = express();
 
-app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://imaging-ai.vercel.app/',
+    origin: 'https://imagingai.onrender.com',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 })); // Use cors middleware to enable CORS
 // console.log(process.env.PORT)
 
+app.use(bodyParser.json());
 app.use('/', routes)
 
 app.listen(process.env.PORT, () => {
