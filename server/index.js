@@ -6,7 +6,6 @@ dotenv.config();
 import routes from './routes/routes.js'
 
 const app = express();
-
 app.use(bodyParser.json());
 
 app.use(cors({
