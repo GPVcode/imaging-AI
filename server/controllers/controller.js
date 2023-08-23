@@ -41,10 +41,11 @@ const getPhotos = async (inputValue, page) => {
     const accessKey =  process.env.Unsplash_Access_Key
     try{
         console.log("touch test in try block in getPhotos")
-        const response = await fetch(`https://api.unsplash.com/search/photos?page=${page}&query=${inputValue}&client_id=${accessKey}`)
-        const data = await response.json();
-        const results = data.results;
-        console.log("results: ", results)
+        // const response = await fetch(`https://api.unsplash.com/search/photos?page=${page}&query=${inputValue}&client_id=${accessKey}`)
+        // const data = await response.json();
+        // const results = data.results;
+        // console.log("results: ", results)
+        const results = "you have received this message"
         return results;
     } catch (error){
         console.error('Something bad happened:', error);
