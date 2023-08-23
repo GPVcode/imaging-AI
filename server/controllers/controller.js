@@ -6,7 +6,7 @@ const generatePhotos = async (inputValue) => {
     const apiKey = process.env.Openai_Access_Key;
     const bearer = 'Bearer ' + apiKey;
     try {
-        console.log("touch test in try block")
+        console.log("touch test in try block in generate Photos")
         const response = await fetch(openaiUrl, {
             method: 'POST',
             headers: {
@@ -20,11 +20,13 @@ const generatePhotos = async (inputValue) => {
             })
         });
 
+
         if (!response.ok) {
             throw new Error(`Network response was not ok from server: ${response.status}`);
         }
 
         const data = await response.json();
+        console.log("DATA: ", data)
         const myImages = data.data;
 
         return myImages;
@@ -36,14 +38,13 @@ const generatePhotos = async (inputValue) => {
 
 
 const getPhotos = async (inputValue, page) => {
-    console.log("touch test")
     const accessKey =  process.env.Unsplash_Access_Key
     try{
-        console.log("touch test in try block")
+        console.log("touch test in try block in getPhotos")
         const response = await fetch(`https://api.unsplash.com/search/photos?page=${page}&query=${inputValue}&client_id=${accessKey}`)
         const data = await response.json();
         const results = data.results;
-
+        console.log("results: ", results)
         return results;
     } catch (error){
         console.error('Something bad happened:', error);
