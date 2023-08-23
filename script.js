@@ -40,6 +40,7 @@ const displayPhotos = async (inputValue, currentPage) => {
 
         const results = await UnsplashFetchAPI(inputValue, currentPage);
 
+        console.log("results are here from backend: ", results)
         if(currentPage === 1) imgContainer.innerHTML = '';
 
         results.forEach((result) => {
