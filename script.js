@@ -48,7 +48,7 @@ const registerPasswordInput = document.getElementById('registerPassword');
 
 const handleLogin = async (username, password) => {
     try{
-        const response = await fetch('http://localhost:5000/auth/login', {
+        const response = await fetch('https://imagingai.onrender.com/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const handleLogin = async (username, password) => {
             localStorage.setItem('token', token);
             loginModal.style.display = "none"; // close modal after handling form submission
             backdrop.style.display = 'none';
-            // window.location.href = '/';
+            window.location.href = '/';
                     
         } else {
              // Registration failes
@@ -85,7 +85,7 @@ const displayLoginError = (errorData) => {
 }
 const handleRegister = async (username, email, password) => {
     try {
-        const response = await fetch('http://localhost:5000/auth/register', {
+        const response = await fetch('https://imagingai.onrender.com/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -123,27 +123,29 @@ const getStoredToken = () => {
 const checkAuthorization = async () => {
     const token = getStoredToken();
     
-    // if (token) {
-    //     try {
-    //         const response = await fetch('http://localhost:5000/auth/check-authorization', {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //         });
+    if (token) {
+        // try {
+        //     const response = await fetch('http://localhost:5000/api/protected-resource', {
+        //         headers: {
+        //             Authorization: `Bearer ${token}`,
+        //         },
+        //     });
+        //     console.log("response", response)
 
-    //         if (response.ok) {
-                    // return true;
-    //             console.log('User has authorization.');
-    //         } else {
-    //             console.log('User is not authorized.');
-    //             return false;
-    //         }
-    //     } catch (error) {
-    //         console.error('Authorization check error:', error);
-            //    return false;
-    //     }
-    // }
-    return true
+        //     if (response.ok) {
+        //             console.log('User has authorization.');
+        //             return true;
+        //     } else {
+        //         console.log('User is not authorized.');
+        //         return false;
+        //     }
+        // } catch (error) {
+        //     console.error('Authorization check error:', error);
+        //        return false;
+        // }
+        return true
+    }
+  
 }
 // create authorization and authentication functions. 
 // use these functions where API calls are made such as buttons.
@@ -154,8 +156,6 @@ const userIsAuthenticated = () => {
 };
 const userHasAuthorization = () => {
     const authorization = checkAuthorization();
-    console.log("auth debug", authorization)
-
     return !!authorization;
 };
 
@@ -221,8 +221,6 @@ registerForm.addEventListener("submit", async (e) => {
 
     // call registerLogin function to perform API call
     await handleRegister(username, email, password);
-    // loginModal.style.display = "flex"; // close modal after handling form submission
-    // registerModal.style.display = "none"; // close modal after handling form submission
 
 })
 registerLink.addEventListener('click', e => {

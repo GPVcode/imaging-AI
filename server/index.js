@@ -7,8 +7,6 @@ import cors from 'cors';
 import routes from './routes/routes.js';
 import authRoutes from './routes/authRoutes.js';
 
-
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());

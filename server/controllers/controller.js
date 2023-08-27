@@ -45,21 +45,21 @@ const loginUser = async (req, res) => {
     }
 };
 
-const requireAuthorization = async (req, res, next) => {
-    const token = req.headers.authorization;
-    console.log("token checker: ", token)
+// const requireAuthorization = async (req, res, next) => {
+//     const token = req.headers.authorization;
+//     console.log("token checker: ", token)
 
-    if(!token){
-        return res.status(401).json({ message: 'Authorization token is missing.' });
-    }
-    jwt.verify(token, secretKey, (err, decoded) => {
-        if(err){
-            return res.status(403).json({ message: 'Authorization failed.' });
-        }
-        req.userId = decoded.userId // store user ID for later use
-        next();
-    });
-};
+//     if(!token){
+//         return res.status(401).json({ message: 'Authorization token is missing.' });
+//     }
+//     jwt.verify(token, secretKey, (err, decoded) => {
+//         if(err){
+//             return res.status(403).json({ message: 'Authorization failed.' });
+//         }
+//         req.userId = decoded.userId // store user ID for later use
+//         next();
+//     });
+// };
 
 const generatePhotos = async (inputValue) => {
     const openaiUrl = "https://api.openai.com/v1/images/generations";
@@ -117,5 +117,5 @@ export default {
     getPhotos,
     registerUser,
     loginUser,
-    requireAuthorization
+    // requireAuthorization
 };
