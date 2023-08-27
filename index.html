@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>AI Image Generator</title>
 </head>
-<body>
 
+<body>
     <!-- Navbar -->
-    <header id="navbar">
+    <header id="navbar" class="navbar">
         <nav class="navbar-container container">
             <a href="/index.html" class="home-link">
                 AI Image Generator 
@@ -33,11 +34,50 @@
             <div id="navbar-menu" aria-labelledby="navbar-toggle">
                 <ul class="navbar-links">
                     <li class="navbar-item"><a class="navbar-link" href="https://github.com/GPVcode/imaging-AI">Github</a></li>
-                    <li class="navbar-item"><a class="navbar-link" href="/teams">Logout</a></li>
+                    <li class="navbar-item"><a class="navbar-link"  id="loginButton" >Login</a></li>
                 </ul>
             </div>
         </nav>
     </header>
+    <div class="backdrop" id="backdrop"></div>
+  <!-- Login Form Modal -->
+  <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="modal-close" id="closeButton">&times;</span>
+            <h2 class="modal-title">Login</h2>
+            <form id="loginForm">
+                <label for="username"><span class="input-label">Username</span></label>
+                <input type="text" class="authInput" id="username" placeholder="Enter your username" required>
+                <label for="password"><span class="input-label">Password</span></label>
+                <input type="password" class="authInput" id="password" placeholder="Enter your password" required>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <div class="register-link">
+                Don't have an account? <a href="#" id="registerLink">Register</a>
+            </div>
+            <div class="login-error" id="loginError"></div>
+        </div>
+    </div>
+
+    <div class="registerModal" id="registerModal">
+        <div class="modal-content">
+            <span class="modal-close" id="registerCloseButton">&times;</span>
+            <h2 class="modal-title">Register</h2>
+            <form id="registerForm">
+                <label for="username"><span class="input-label">Username</span></label>
+                <input type="text" class="authInput" id="registerUsername" placeholder="Enter your username" required>
+                <label for="email"><span class="input-label">Email</span></label>
+                <input type="email" class="authInput" id="registerEmail" placeholder="Enter your email" required>
+                <label for="password"><span class="input-label">Password</span></label>
+                <input type="password" class="authInput" id="registerPassword" placeholder="Enter your password" required>
+                <button type="submit" class="btn-primary">Register</button>
+            </form>
+            <div class="register-link">
+                Already have an account? <a href="#" id="loginLink">Login</a>
+            </div>
+            <div class="registration-error" id="registrationError"></div>
+        </div>
+    </div>
 
     <div class="container outer-container">
         <div class="Card">
@@ -78,9 +118,6 @@
             <button type="button" class="show-more-btn" hidden >Show More</button>
         </div>
     </div>
-
-    <!-- <div class="space-filler"></div> -->
-
 
     <script src="script.js"></script>
 </body>
