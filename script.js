@@ -315,7 +315,6 @@ const OpenaiFetchAPI = async (inputValue) => {
 
         showLoadingIcon();
         if(userHasAuthorization() && userIsAuthenticated()){
-            const token = getStoredToken
             const response = await fetch('https://imagingai.onrender.com/generate-photos', {
                 method: 'POST',
                 headers: {
@@ -398,36 +397,50 @@ const createLoginAlert = async () => {
 // END OF AI API
 
 // API Toggle Manger
+
 let apiChoice = ""
-
-openAiBtn.addEventListener('focus', () => {
-    openAiBtn.style.boxShadow = '0 1px #05616d';
-    openAiBtn.style.backgroundColor = '#0491a3';
-    openAiBtn.style.transform = 'translateY(1px)';
-    openAiBtn.style.color = 'gold';
-
-})
-openAiBtn.addEventListener('blur', () => {
-    openAiBtn.style.boxShadow = '';
-    openAiBtn.style.backgroundColor = '';
-    openAiBtn.style.transform = '';
-    openAiBtn.style.color = '';
+openAiBtn.addEventListener('click', () => {
+    toggleButtonStyles(openAiBtn);
     apiChoice = 'OPENAIAPI';
     showMoreBtn.hidden = true;
-})
-unsplashBtn.addEventListener('focus', () => {
-    unsplashBtn.style.boxShadow = '0 1px #05616d';
-    unsplashBtn.style.backgroundColor = '#0491a3';
-    unsplashBtn.style.transform = 'translateY(1px)';
-    unsplashBtn.style.color = 'gold';
-})
-unsplashBtn.addEventListener('blur', () => {
-    unsplashBtn.style.boxShadow = '';
-    unsplashBtn.style.backgroundColor = '';
-    unsplashBtn.style.transform = '';
-    unsplashBtn.style.color = '';
+    resetButtonStyles(unsplashBtn);
+});
+
+unsplashBtn.addEventListener('click', () => {
+    toggleButtonStyles(unsplashBtn);
     apiChoice = 'UNSPLASHAPI';
-})
+    resetButtonStyles(openAiBtn);
+});
+
+// Add touchstart event listeners
+openAiBtn.addEventListener('touchstart', () => {
+    toggleButtonStyles(openAiBtn);
+    apiChoice = 'OPENAIAPI';
+    showMoreBtn.hidden = true;
+    resetButtonStyles(unsplashBtn);
+});
+
+unsplashBtn.addEventListener('touchstart', () => {
+    toggleButtonStyles(unsplashBtn);
+    apiChoice = 'UNSPLASHAPI';
+    resetButtonStyles(openAiBtn);
+});
+
+// Function to toggle button styles
+const toggleButtonStyles = (button) => {
+    button.style.boxShadow = button.style.boxShadow ? '' : '0 1px #05616d';
+    button.style.backgroundColor = button.style.backgroundColor ? '' : '#0491a3';
+    // button.style.transform = button.style.transform ? '' : 'translateY(-3px)';
+    button.style.color = button.style.color ? '' : 'gold';
+};
+
+const resetButtonStyles = (button) => {
+    button.style.boxShadow = '';
+    button.style.backgroundColor = '';
+    button.style.transform = '';
+    button.style.color = '';
+};
+
 // END OF TOGGLE MANAGER
 
 
