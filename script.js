@@ -397,48 +397,37 @@ const createLoginAlert = async () => {
 // END OF AI API
 
 // API Toggle Manger
-
-let apiChoice = ""
-openAiBtn.addEventListener('click', () => {
-    toggleButtonStyles(openAiBtn);
-    apiChoice = 'OPENAIAPI';
-    showMoreBtn.hidden = true;
-    resetButtonStyles(unsplashBtn);
-});
-
-unsplashBtn.addEventListener('click', () => {
-    toggleButtonStyles(unsplashBtn);
-    apiChoice = 'UNSPLASHAPI';
-    resetButtonStyles(openAiBtn);
-});
-
-// Add touchstart event listeners
-openAiBtn.addEventListener('touchstart', () => {
-    toggleButtonStyles(openAiBtn);
-    apiChoice = 'OPENAIAPI';
-    showMoreBtn.hidden = true;
-    resetButtonStyles(unsplashBtn);
-});
-
-unsplashBtn.addEventListener('touchstart', () => {
-    toggleButtonStyles(unsplashBtn);
-    apiChoice = 'UNSPLASHAPI';
-    resetButtonStyles(openAiBtn);
-});
+// API Toggle Manager
+let apiChoice = ""; // API flag
 
 // Function to toggle button styles
 const toggleButtonStyles = (button) => {
-    button.style.boxShadow = button.style.boxShadow ? '' : '0 1px #05616d';
-    button.style.backgroundColor = button.style.backgroundColor ? '' : '#0491a3';
-    // button.style.transform = button.style.transform ? '' : 'translateY(-3px)';
-    button.style.color = button.style.color ? '' : 'gold';
+    button.style.boxShadow = button.style.boxShadow ? "" : "0 1px #05616d";
+    button.style.backgroundColor = button.style.backgroundColor ? "" : "#0491a3";
+    // button.style.transform = button.style.transform ? "" : "translateY(-3px)";
+    button.style.color = button.style.color ? "" : "gold";
 };
 
+// Add click event listeners
+openAiBtn.addEventListener("click", () => {
+    toggleButtonStyles(openAiBtn);
+    apiChoice = "OPENAIAPI";
+    showMoreBtn.hidden = true;
+    resetButtonStyles(unsplashBtn);
+});
+
+unsplashBtn.addEventListener("click", () => {
+    toggleButtonStyles(unsplashBtn);
+    apiChoice = "UNSPLASHAPI";
+    resetButtonStyles(openAiBtn);
+});
+
+// Function to reset button styles
 const resetButtonStyles = (button) => {
-    button.style.boxShadow = '';
-    button.style.backgroundColor = '';
-    button.style.transform = '';
-    button.style.color = '';
+    button.style.boxShadow = "";
+    button.style.backgroundColor = "";
+    button.style.transform = "";
+    button.style.color = "";
 };
 
 // END OF TOGGLE MANAGER

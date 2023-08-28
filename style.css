@@ -421,6 +421,7 @@ button.unsplash-btn {
     cursor: pointer;
     margin-bottom: 4px;
     border: none;
+    z-index: 99;
 }
 
   
