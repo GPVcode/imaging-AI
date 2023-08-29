@@ -6,9 +6,9 @@ let expandState = toggler.getAttribute('aria-expanded') === 'true';
 
 // create function to toggle expand state
 const stateToggle = async () => {
-        expandState = !expandState;
-        //  get element, then set target attribute to new attribute
-        toggler.setAttribute('aria-expanded', expandState)
+    expandState = !expandState;
+    //  get element, then set target attribute to new attribute
+    toggler.setAttribute('aria-expanded', expandState)
 }
 // toggle the expanded state. See stateToggle.
 toggler.addEventListener('click', stateToggle) 
@@ -21,11 +21,13 @@ navbarMenu.addEventListener('click', stateToggle);
 // END OF NAVBAR
 
 // Elements
-const imgContainer = document.querySelector(".api-container");
-const imgFiller = document.querySelector(".api-filler");
+const landingPage = document.getElementById('landingPage');
+const userDashboard = document.getElementById('userDashboard');
+const imgContainer = document.querySelector('.api-container');
+const imgFiller = document.querySelector('.api-filler');
 const openAiBtn = document.querySelector('.openai-btn');
 const unsplashBtn = document.querySelector('.unsplash-btn');
-const showMoreBtn = document.querySelector(".show-more-btn");
+const showMoreBtn = document.querySelector('.show-more-btn');
 const outerContainer = document.querySelector('.outer-container');
 const alertContainer = document.querySelector('.alert-container');
 const loadingImg = document.getElementById('loading-img');
@@ -39,12 +41,13 @@ const loginPasswordInput = document.getElementById('password');
 const backdrop = document.getElementById('backdrop');
 const registerLink = document.getElementById('registerLink');
 const registerModal = document.querySelector('.registerModal');
-const registerCloseButton = document.getElementById('registerCloseButton')
+const registerCloseButton = document.getElementById('registerCloseButton');
 const registerForm = document.getElementById('registerForm');
 const registerUsernameInput = document.getElementById('registerUsername');
 const registerEmailInput = document.getElementById('registerEmail');
 const registerPasswordInput = document.getElementById('registerPassword');
-
+const loginCTA = document.getElementById('login-cta-button');
+const registerCTA = document.getElementById('registerCTA');
 
 const handleLogin = async (username, password) => {
     try{
@@ -62,7 +65,7 @@ const handleLogin = async (username, password) => {
 
             // Store token in localStorage
             localStorage.setItem('token', token);
-            loginModal.style.display = "none"; // close modal after handling form submission
+            loginModal.style.display = 'none'; // close modal after handling form submission
             backdrop.style.display = 'none';
             window.location.href = '/';
                     
@@ -97,8 +100,8 @@ const handleRegister = async (username, email, password) => {
             // registration successful
             const data = await response.json();
             console.log('Registration successful.', data.message);
-            loginModal.style.display = "flex"; // close modal after handling form submission
-            registerModal.style.display = "none"; // close modal after handling form submission
+            loginModal.style.display = 'flex'; // close modal after handling form submission
+            registerModal.style.display = 'none'; // close modal after handling form submission
         } else {
             // Registration failes
             const errorData = await response.json();
@@ -120,6 +123,7 @@ const displayRegistrationError = (errorData) => {
 const getStoredToken = () => {
    return localStorage.getItem('token');
 }
+
 const checkAuthorization = async () => {
     const token = getStoredToken();
     
@@ -130,7 +134,7 @@ const checkAuthorization = async () => {
         //             Authorization: `Bearer ${token}`,
         //         },
         //     });
-        //     console.log("response", response)
+        //     console.log('response', response)
 
         //     if (response.ok) {
         //             console.log('User has authorization.');
@@ -145,8 +149,8 @@ const checkAuthorization = async () => {
         // }
         return true
     }
-  
 }
+
 // create authorization and authentication functions. 
 // use these functions where API calls are made such as buttons.
 // Authentication and Authorizations Functions:
@@ -159,6 +163,13 @@ const userHasAuthorization = () => {
     return !!authorization;
 };
 
+if(userIsAuthenticated()){
+    landingPage.style.display = 'none';
+    userDashboard.style.display = 'block';
+} else {
+    landingPage.style.display = 'block';
+    userDashboard.style.display = 'none';
+}
 const updateNavbarButton = () => {
     if(userIsAuthenticated()){
         loginButton.textContent = 'Logout';
@@ -191,18 +202,18 @@ const handleLogout = () => {
 };
 
 closeButton.addEventListener('click', (e) => {
-    loginModal.style.display = "none";
+    loginModal.style.display = 'none';
     backdrop.style.display = 'none';
 });
 
 registerCloseButton.addEventListener('click', (e) => {
-    console.log("button is clicked")
+    console.log('button is clicked')
     registerModal.style.display = 'none';
     backdrop.style.display = 'none';
 
 });
 
-loginForm.addEventListener("submit", async (e) => {
+loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     // handle login form submission
     const username = loginUsernameInput.value;
@@ -212,7 +223,7 @@ loginForm.addEventListener("submit", async (e) => {
     await handleLogin(username, password);
 });
 
-registerForm.addEventListener("submit", async (e) => {
+registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     // handle register form submission
     const username = registerUsernameInput.value;
@@ -224,15 +235,23 @@ registerForm.addEventListener("submit", async (e) => {
 
 })
 registerLink.addEventListener('click', e => {
-    loginModal.style.display = "none";
-    registerModal.style.display = "flex";
+    loginModal.style.display = 'none';
+    registerModal.style.display = 'flex';
 });
-
+registerCTA.addEventListener('click', e => {
+    backdrop.style.display = 'block';
+    loginModal.style.display = 'none';
+    registerModal.style.display = 'flex';
+});
 loginLink.addEventListener('click', e => {
-    registerModal.style.display = "none";
-    loginModal.style.display = "flex";
+    registerModal.style.display = 'none';
+    loginModal.style.display = 'flex';
 });
-
+loginCTA.addEventListener('click', e => {
+    backdrop.style.display = 'block';
+    registerModal.style.display = 'none';
+    loginModal.style.display = 'flex';
+});
 // Unsplash API call
 let currentPage = 1;
 const displayPhotos = async (inputValue, currentPage) => {
@@ -351,6 +370,8 @@ const OpenaiFetchAPI = async (inputValue) => {
     }
 }
 
+
+
 const checkForElement = async () => {
     const currentCont = document.querySelector('.alert-container');
     if(!currentCont){
@@ -363,8 +384,8 @@ const checkForElement = async () => {
 const createAlert = async () => {
     // Create alert elements using template literals
     const alertHTML = `
-        <div class="alert-container">
-            <p class="alert-message">Please select an image source.</p>
+        <div class='alert-container'>
+            <p class='alert-message'>Please select an image source.</p>
         </div>
     `;
     // create div container element
@@ -375,8 +396,8 @@ const createAlert = async () => {
 
 const createCredAlert = async () => {
     const alertHTML = `
-    <div class="alert-container">
-        <p class="alert-message">Please register or log in.</p>
+    <div class='alert-container'>
+        <p class='alert-message'>Please register or log in.</p>
     </div>
     `;
     const alertCont = document.createElement('div');
@@ -386,8 +407,8 @@ const createCredAlert = async () => {
 
 const createLoginAlert = async () => {
     const alertHTML = `
-    <div class="alert-container">
-        <p class="alert-message">Login failed. Please try again or register an account. </p>
+    <div class='alert-container'>
+        <p class='alert-message'>Login failed. Please try again or register an account. </p>
     </div>
     `;
     const alertCont = document.createElement('div');
@@ -398,36 +419,36 @@ const createLoginAlert = async () => {
 
 // API Toggle Manger
 // API Toggle Manager
-let apiChoice = ""; // API flag
+let apiChoice = ''; // API flag
 
 // Function to toggle button styles
 const toggleButtonStyles = (button) => {
-    button.style.boxShadow = button.style.boxShadow ? "" : "0 1px #05616d";
-    button.style.backgroundColor = button.style.backgroundColor ? "" : "#0491a3";
-    // button.style.transform = button.style.transform ? "" : "translateY(-3px)";
-    button.style.color = button.style.color ? "" : "gold";
+    button.style.boxShadow = button.style.boxShadow ? '' : '0 1px #05616d';
+    button.style.backgroundColor = button.style.backgroundColor ? '' : '#0491a3';
+    // button.style.transform = button.style.transform ? '' : 'translateY(-3px)';
+    button.style.color = button.style.color ? '' : 'gold';
 };
 
 // Add click event listeners
-openAiBtn.addEventListener("click", () => {
+openAiBtn.addEventListener('click', () => {
     toggleButtonStyles(openAiBtn);
-    apiChoice = "OPENAIAPI";
+    apiChoice = 'OPENAIAPI';
     showMoreBtn.hidden = true;
     resetButtonStyles(unsplashBtn);
 });
 
-unsplashBtn.addEventListener("click", () => {
+unsplashBtn.addEventListener('click', () => {
     toggleButtonStyles(unsplashBtn);
-    apiChoice = "UNSPLASHAPI";
+    apiChoice = 'UNSPLASHAPI';
     resetButtonStyles(openAiBtn);
 });
 
 // Function to reset button styles
 const resetButtonStyles = (button) => {
-    button.style.boxShadow = "";
-    button.style.backgroundColor = "";
-    button.style.transform = "";
-    button.style.color = "";
+    button.style.boxShadow = '';
+    button.style.backgroundColor = '';
+    button.style.transform = '';
+    button.style.color = '';
 };
 
 // END OF TOGGLE MANAGER
@@ -443,10 +464,10 @@ searchBtn.addEventListener('click', async () => {
     searchInput.setAttribute('value', searchInput.value)
     const inputValue = searchInput.value;
 
-    if(apiChoice === "OPENAIAPI"){
+    if(apiChoice === 'OPENAIAPI'){
         await OpenaiFetchAPI(inputValue);
     } 
-    else if(apiChoice === "UNSPLASHAPI"){
+    else if(apiChoice === 'UNSPLASHAPI'){
         currentPage = 1;
         await displayPhotos(inputValue, currentPage);
     }

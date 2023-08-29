@@ -79,45 +79,121 @@
         </div>
     </div>
 
-    <div class="container outer-container">
-        <div class="Card">
-            <div class="CardInner">
-                <div class="card-header">
-                    <div class="card-header-left">
-                        <label for="icon-button left">Describe your image</label>
-                    </div>
-                    <div class="card-header-right">
-                        <button class="openai-btn">OpenAI</button>
-                        <button class="unsplash-btn">Unsplash</button>
-                    </div>
-                </div>
-                <div class="form-container">
-                    <div name="icon-button" class="Icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f3f3f3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    </div>
-                    <div class="input-container">
-                        <input class="search-input" value="Dog with a blue ball" />
+    <section class="landing-page" id="landingPage">
+        <div class="landing-container">
+        <!-- Your landing page content here -->
+        <header class="impressive-header">
+            <h1>Welcome to  <span class="highlight">Imaging AI </span>by <span class="highlight">GPVdev</span></h1>
+            <p>Explore an innovative method for generating image concepts using the newest AI technology.</p>
+            <div class="cta-button-container"><button id="login-cta-button" class="cta-button">Get Started</button></div>
+        </header>
+
+        <div class="content-wrapper">
+            <section class="features">
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>AI-Generated Images:</strong> Generate high-quality images using advanced AI algorithms. Whether you need illustrations, photographs, or conceptual designs, our app harnesses the power of artificial intelligence to create stunning visuals tailored to your requirements.</li>
+                    <li><strong>Intuitive User Interface:</strong> Our user-friendly interface ensures that even beginners can navigate the app effortlessly. With a streamlined design and intuitive controls, you can easily describe your desired image and receive instant results.</li>
+                    <li><strong>Seamless Integration with Unsplash:</strong> Access a vast library of images from Unsplash directly within the app. Easily incorporate existing visuals into your AI-generated creations, combining the best of both worlds for a truly unique and engaging result.</li>
+                </ul>
+            </section>
+            
+            <section class="why-choose">
+                <h2>Why Choose Imaging AI?</h2>
+                
+                <p>Experience Limitless Creativity with Our AI Image Generator!<br/><br/>
+                    Are you tired of sifting through stock image libraries that fail to capture your unique vision? Look no further! Our AI Image Generator revolutionizes the way you create visuals. 
+                    <br/><br/><i>Here's why you should choose our app:</i><br/>
+                    <strong>Unleash Your Imagination:</strong> Imagine describing your image to an AI, and it crafts an image that matches your imagination perfectly. Our AI-powered technology transforms your words into breathtaking visuals, bringing your creative ideas to life like never before.
+                    <br/><br/>
+                    <strong>Save Time and Effort:</strong> No more hours spent scouring the internet for the right image. Our app generates tailored visuals instantly, saving you valuable time and effort. Focus on what truly matters – your creativity and projects.
+                    <br/><br/>
+                    <strong>Unparalleled Customization:</strong> Need an image that's as unique as your idea? Our AI Image Generator offers unparalleled customization. Describe the scene, style, and elements you want, and watch as the AI creates a masterpiece that's tailor-made just for you.
+                    <br/><br/>
+                    <strong>Stay Ahead of the Curve:</strong> Embrace the future of design and content creation. AI is changing the game, and our app puts you at the forefront of this technological revolution. Impress clients, colleagues, and audiences with visuals that stand out and captivate.
+                    <br/><br/>
+                    <strong>Seamless Integration:</strong> Worried about compatibility? Our app seamlessly integrates with Unsplash, one of the largest image repositories, allowing you to enhance AI-generated visuals with a world of existing content.
+                    <br/><br/>
+                    <strong>User-Friendly Interface:</strong> You don't need to be an expert to use our app. Our user-friendly interface makes it easy for both beginners and professionals to create stunning visuals with ease.
+                    <br/><br/>
+                    Experience the magic of AI-powered image generation. Join us and unlock a new realm of creativity. Let your ideas take flight, and watch as our app transforms them into breathtaking reality. Your imagination is the only limit!
+                </p>
+            </section>
+            
+            <section class="how-it-works">
+                <h2>How It Works</h2>
+                <ol>
+                    <li>Choose the source for the image you need.</li>
+                    <li>Provide a description of the image you wish to obtain.</li>
+                    <li>Click on the search button.</li>
+                </ol>
+            </section>
+        </div>
+
+        <section class="get-started">
+            <h2>Get Started Today</h2>
+            <p>Join us on this journey to redefine creativity and design. Try our AI Image Generator today and witness the future of visual content creation.</p>
+            <div class="cta-button-container"><button class="cta-button" id="registerCTA">Sign Up</button></div>
+        </section>
+        
+        <section class="contact">
+            <h2>Contact Us</h2>
+            <p>Got questions? We're here to help. <br/>Reach out to our support team at <a href="mailto:support@example.com">gvill005@gmail.com</a> or follow us on social media for the latest updates.</p>
+            <div class="social-media-icons">
+                <!-- Add your social media icons here -->
+            </div>
+        </section>
+    
+        <footer class="centered-footer">
+            <br/><br/>
+            <p>&copy; 2023 Imaging AI. All rights reserved.</p>
+        </footer>
+        </div>
+    </section>
+
+
+    <secion class="user-dashboard" id="userDashboard" style="display: none;">
+        <div class="container outer-container">
+            <div class="Card">
+                <div class="CardInner">
+                    <div class="card-header">
+                        <div class="card-header-left">
+                            <label for="icon-button left">Describe your image</label>
                         </div>
+                        <div class="card-header-right">
+                            <button class="openai-btn">OpenAI</button>
+                            <button class="unsplash-btn">Unsplash</button>
+                        </div>
+                    </div>
+                    <div class="form-container">
+                        <div name="icon-button" class="Icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f3f3f3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        </div>
+                        <div class="input-container">
+                            <input class="search-input" value="Dog with a blue ball" />
+                            </div>
+                    </div>
                 </div>
             </div>
+    
+            <div id="loading-icon">
+                <img id="loading-img" src="./assets/spinning-circles.svg" alt="Loading..." class="hidden">
+            </div>
+    
+            <div class="api-container">
+                <div class="api-filler"></div>
+                <div class="api-filler"></div>
+                <div class="api-filler"></div>
+                <div class="api-filler"></div>
+                <div class="api-filler"></div>
+                <div class="api-filler"></div>
+            </div>
+            <div class="show-more-container">
+                <button type="button" class="show-more-btn" hidden >Show More</button>
+            </div>
         </div>
-
-        <div id="loading-icon">
-            <img id="loading-img" src="./assets/spinning-circles.svg" alt="Loading..." class="hidden">
-        </div>
-
-        <div class="api-container">
-            <div class="api-filler"></div>
-            <div class="api-filler"></div>
-            <div class="api-filler"></div>
-            <div class="api-filler"></div>
-            <div class="api-filler"></div>
-            <div class="api-filler"></div>
-        </div>
-        <div class="show-more-container">
-            <button type="button" class="show-more-btn" hidden >Show More</button>
-        </div>
-    </div>
+    </secion>
+    
 
     <script src="script.js"></script>
 </body>
